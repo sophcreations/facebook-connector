@@ -69,18 +69,17 @@ class LoginController extends Controller
           }
         }
 
-        // else sign the user up
+        // else add the user to the database
         $userSignup = User::updateOrCreate([
           'name' => $auth_user->user['name'],
           'email' => $auth_user->email,
-          // 'gender' => $auth_user->user['gender'],
           'password' => bcrypt('1234'),
           'token' => $auth_user->token
         ]);
 
         // log the user in
         if($userSignup){
-          if(Auth::loginUsingId($user->id)){
+          if(Auth::loginUsingId($auth_user->id)){
             return redirect()->to('home');
           }
         }

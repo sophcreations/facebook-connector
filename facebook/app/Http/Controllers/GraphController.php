@@ -20,7 +20,6 @@ class GraphController extends Controller
     }
 
     public function retrieveUserProfile(){
-      echo 'sophia';
         try {
 
             $params = "first_name,last_name";

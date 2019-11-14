@@ -57,6 +57,10 @@
                                     {{ __('Login') }}
                                 </button>
 
+                                <a href="/login/facebook" class="btn btn-primary" style="color: #fff; background: #007bff;">
+                                    {{ __('Sign in with Facebook') }}
+                                </a>
+
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     {{ __('Forgot Your Password?') }}
                                 </a>
