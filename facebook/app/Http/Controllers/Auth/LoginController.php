@@ -48,7 +48,6 @@ class LoginController extends Controller
      */
     public function redirectToFacebookProvider()
     {
-      //scopes for app permissions
       return Socialite::driver('facebook')->scopes(["manage_pages", "publish_pages", "pages_show_list"])->redirect();
     }
 
@@ -62,6 +61,28 @@ class LoginController extends Controller
 
         $auth_user = Socialite::driver('facebook')->user();
 
-        return $user->name;
+        //check if user exists and log the user in
+        $user = User::where('email', $auth_user->email)->first();
+        if($user){
+          if(Auth::loginUsingId($user->id)){
+            return redirect()->to('home');
+          }
+        }
+
+        // else sign the user up
+        $userSignup = User::updateOrCreate([
+          'name' => $auth_user->user['name'],
+          'email' => $auth_user->email,
+          // 'gender' => $auth_user->user['gender'],
+          'password' => bcrypt('1234'),
+          'token' => $auth_user->token
+        ]);
+
+        // log the user in
+        if($userSignup){
+          if(Auth::loginUsingId($user->id)){
+            return redirect()->to('home');
+          }
+        }
     }
 }
