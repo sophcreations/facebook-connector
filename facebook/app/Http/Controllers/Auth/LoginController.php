@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class LoginController extends Controller
 {
@@ -35,5 +39,29 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * Redirect the user to the Facebook authentication page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function redirectToFacebookProvider()
+    {
+      //scopes for app permissions
+      return Socialite::driver('facebook')->scopes(["manage_pages", "publish_pages", "pages_show_list"])->redirect();
+    }
+
+    /**
+     * Obtain the user information from Facebook.
+     *
+     * @return void
+     */
+    public function handleProviderFacebookCallback()
+    {
+
+        $auth_user = Socialite::driver('facebook')->user();
+
+        return $user->name;
     }
 }
