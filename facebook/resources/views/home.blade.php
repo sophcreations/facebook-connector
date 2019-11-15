@@ -2,9 +2,6 @@
 
 @section('content')
 <div class="container">
-      <a href="/app" class="btn btn-primary" style="color: #fff; background: #007bff;">
-        Home
-    </a>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -20,7 +17,11 @@
                     You are logged in!
                 </div>
             </div>
+            <a href="/app" class="btn btn-primary" style="color: #fff; background: rgb(111, 111, 111); border-color: beige">
+              Back to user profile
+            </a>
         </div>
     </div>
 </div>
+
 @endsection

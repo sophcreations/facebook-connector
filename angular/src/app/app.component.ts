@@ -20,7 +20,6 @@ export class AppComponent implements OnInit {
       this.user = data;
 
       this.http.get('http://localhost:8000/user').subscribe(output => {
-        console.log(output);
         this.fields = output;
       });
     });

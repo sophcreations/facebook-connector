@@ -41,7 +41,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!DOCTYPE html>\r\n<html>\r\n<head>\r\n<style>\r\ntable, th, td {\r\n  border: 1px solid black;\r\n}\r\n</style>\r\n</head>\r\n\r\n<body>\r\n  <div style=\"text-align:center\">\r\n    <a href=\"/login/facebook\" class=\"btn btn-primary\" style=\"color: #fff; background: #007bff;\">\r\n        Home\r\n    </a>\r\n    <h1>\r\n      Hello {{ user?.name }}!\r\n    </h1>\r\n    <img width=\"300\" height=\"300\" src={{fields?.picture.url}}>\r\n  </div>\r\n  <h2>User Profile</h2>\r\n  <table style=\"width:100%\">\r\n    <tr>\r\n      <th>Firstname</th>\r\n      <th>Lastname</th>\r\n      <th>Gender</th>\r\n      <th>Birthday</th>\r\n    </tr>\r\n    <tr>\r\n      <td>{{ fields?.first_name }}</td>\r\n      <td>{{ fields?.last_name }}</td>\r\n      <td>{{ fields?.gender }}</td>\r\n      <td>{{ fields?.birthday }}</td>\r\n    </tr>\r\n </table>\r\n  <h2>User Post</h2>\r\n  {{ fields?.posts[0].message }} <!-- Get only the first post on the users page -->\r\n  <h2>User Profile</h2>\r\n  {{ fields?.link }}\r\n</body>"
+module.exports = "<!DOCTYPE html>\r\n<html>\r\n<head>\r\n<style>\r\nh2 {\r\n  /*background: #0e7bd8; width: fit-content;*/\r\n}\r\ntable, th, td {\r\n  border: 1px solid black;\r\n}\r\nth, td {\r\n  padding: 15px;\r\n}\r\n.home{\r\n  color: rgb(255, 255, 255);\r\n  background: rgb(111, 111, 111);\r\n  cursor: pointer;\r\n  border-radius: .25rem;\r\n  display: inline-block;\r\n  border: 1px solid transparent;\r\n  width: 75px;\r\n  height: 25px;\r\n  text-decoration: none;\r\n}\r\n</style>\r\n</head>\r\n\r\n<body>\r\n  <div style=\"text-align:center\">\r\n    <a class=\"home\" href=\"/login/facebook\">Home</a>\r\n    <h1>Hello {{ user?.name }}!</h1>\r\n    <img width=\"300\" height=\"300\" src={{fields?.picture.url}}>\r\n  </div>\r\n  <div align=\"center\" >\r\n    <h2><u>User Profile</u></h2>\r\n  </div>\r\n  <table align=\"center\" style=\"width:47%\">\r\n    <tr>\r\n      <th>Firstname</th>\r\n      <th>Lastname</th>\r\n      <th>Gender</th>\r\n      <th>Birthday</th>\r\n    </tr>\r\n    <tr>\r\n      <td>{{ fields?.first_name }}</td>\r\n      <td>{{ fields?.last_name }}</td>\r\n      <td>{{ fields?.gender }}</td>\r\n      <td>{{ fields?.birthday }}</td>\r\n    </tr>\r\n  </table>\r\n  <div align=\"center\" >\r\n    <h2><u>User Post</u></h2>\r\n    {{ fields?.posts[0].message }} <!-- Get only the first post on the users page -->\r\n    </div>\r\n  <div align=\"center\" >\r\n    <h2><u>User Profile</u></h2>\r\n    <a style=\"text-decoration: none;\" href='{{ fields?.link }}'>Profile</a>\r\n  </div>\r\n</body>"
 
 /***/ }),
 
@@ -78,7 +78,6 @@ var AppComponent = /** @class */ (function () {
         this.http.get('http://localhost:8000/auth').subscribe(function (data) {
             _this.user = data;
             _this.http.get('http://localhost:8000/user').subscribe(function (output) {
-                console.log(output);
                 _this.fields = output;
             });
         });

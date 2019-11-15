@@ -2,24 +2,39 @@
 <html>
 <head>
 <style>
+h2 {
+  /*background: #0e7bd8; width: fit-content;*/
+}
 table, th, td {
   border: 1px solid black;
+}
+th, td {
+  padding: 15px;
+}
+.home{
+  color: rgb(255, 255, 255);
+  background: rgb(111, 111, 111);
+  cursor: pointer;
+  border-radius: .25rem;
+  display: inline-block;
+  border: 1px solid transparent;
+  width: 75px;
+  height: 25px;
+  text-decoration: none;
 }
 </style>
 </head>
 
 <body>
   <div style="text-align:center">
-    <a href="/login/facebook" class="btn btn-primary" style="color: #fff; background: #007bff;">
-        Home
-    </a>
-    <h1>
-      Hello {{ user?.name }}!
-    </h1>
+    <a class="home" href="/login/facebook">Home</a>
+    <h1>Hello {{ user?.name }}!</h1>
     <img width="300" height="300" src={{fields?.picture.url}}>
   </div>
-  <h2>User Profile</h2>
-  <table style="width:100%">
+  <div align="center" >
+    <h2><u>User Profile</u></h2>
+  </div>
+  <table align="center" style="width:47%">
     <tr>
       <th>Firstname</th>
       <th>Lastname</th>
@@ -32,9 +47,13 @@ table, th, td {
       <td>{{ fields?.gender }}</td>
       <td>{{ fields?.birthday }}</td>
     </tr>
- </table>
-  <h2>User Post</h2>
-  {{ fields?.posts[0].message }} <!-- Get only the first post on the users page -->
-  <h2>User Profile</h2>
-  {{ fields?.link }}
+  </table>
+  <div align="center" >
+    <h2><u>User Post</u></h2>
+    {{ fields?.posts[0].message }} <!-- Get only the first post on the users page -->
+    </div>
+  <div align="center" >
+    <h2><u>User Profile</u></h2>
+    <a style="text-decoration: none;" href='{{ fields?.link }}'>Profile</a>
+  </div>
 </body>
