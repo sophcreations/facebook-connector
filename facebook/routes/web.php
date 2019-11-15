@@ -27,3 +27,14 @@ Route::group(['middleware' => [
 ]], function(){
     Route::get('/user', 'GraphController@retrieveUserProfile');
 });
+
+Route::get('/auth', function () {
+    //Perform a check whether the user is authenticated or not
+    if(!Auth::check())
+    {
+      //If they are not, forcefully login the user with id=1
+      $user = App\User::find(1);
+      Auth::login($user);
+    }
+    return Auth::user();
+});
