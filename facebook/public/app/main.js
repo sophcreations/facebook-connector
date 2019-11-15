@@ -41,7 +41,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n  <h1>\n    Welcome to {{ title }}!\n  </h1>\n  <img width=\"300\" alt=\"Angular Logo\" src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\">\n</div>\n<h2>Here are some links to help you start: </h2>\n<ul>\n  <li>\n    <h2><a target=\"_blank\" rel=\"noopener\" href=\"https://angular.io/tutorial\">Tour of Heroes</a></h2>\n  </li>\n  <li>\n    <h2><a target=\"_blank\" rel=\"noopener\" href=\"https://github.com/angular/angular-cli/wiki\">CLI Documentation</a></h2>\n  </li>\n  <li>\n    <h2><a target=\"_blank\" rel=\"noopener\" href=\"https://blog.angular.io/\">Angular blog</a></h2>\n  </li>\n</ul>\n\n"
+module.exports = "<!DOCTYPE html>\r\n<html>\r\n<head>\r\n<style>\r\ntable, th, td {\r\n  border: 1px solid black;\r\n}\r\n</style>\r\n</head>\r\n\r\n<body>\r\n  <div style=\"text-align:center\">\r\n    <a href=\"/login/facebook\" class=\"btn btn-primary\" style=\"color: #fff; background: #007bff;\">\r\n        Home\r\n    </a>\r\n    <h1>\r\n      Hello {{ user?.name }}!\r\n    </h1>\r\n    <img width=\"300\" height=\"300\" src={{fields?.picture.url}}>\r\n  </div>\r\n  <h2>User Profile</h2>\r\n  <table style=\"width:100%\">\r\n    <tr>\r\n      <th>Firstname</th>\r\n      <th>Lastname</th>\r\n      <th>Gender</th>\r\n      <th>Birthday</th>\r\n    </tr>\r\n    <tr>\r\n      <td>{{ fields?.first_name }}</td>\r\n      <td>{{ fields?.last_name }}</td>\r\n      <td>{{ fields?.gender }}</td>\r\n      <td>{{ fields?.birthday }}</td>\r\n    </tr>\r\n </table>\r\n  <h2>User Post</h2>\r\n  {{ fields?.posts[0].message }} <!-- Get only the first post on the users page -->\r\n  <h2>User Profile</h2>\r\n  {{ fields?.link }}\r\n</body>"
 
 /***/ }),
 
@@ -68,9 +68,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
-// import { Fields } from './Fields';
 var AppComponent = /** @class */ (function () {
-    // fields: Fields;
     function AppComponent(http) {
         this.http = http;
     }
@@ -78,15 +76,12 @@ var AppComponent = /** @class */ (function () {
         var _this = this;
         // Make the HTTP request:
         this.http.get('http://localhost:8000/auth').subscribe(function (data) {
-            // console.log(data);
             _this.user = data;
+            _this.http.get('http://localhost:8000/user').subscribe(function (output) {
+                console.log(output);
+                _this.fields = output;
+            });
         });
-        // List of things i want to show: "first_name,last_name,picture,birthday,gender,posts";
-        // var accessToken = 'EAAGbrjEyK6QBAOBdYbVtvdY5xqZCx7RiAifj4LhyslAxfdzAZBIkmC6wtg8OUJXbVbfQgpw6D7Sinpybkds61AnmX77EWpMzmbFIZBZA33ZCqhJsZB5QpjynvNPK7qmnHd7ZAnl5mj9z0Tl3dp3nCFOL3OrotWZA6ncbaNM9zZCN28kcNizZBKUc7r';
-        // this.http.get('https://graph.facebook.com/v5.0/me?fields=picture,first_name%2Cbirthday&access_token=EAAGbrjEyK6QBAOBdYbVtvdY5xqZCx7RiAifj4LhyslAxfdzAZBIkmC6wtg8OUJXbVbfQgpw6D7Sinpybkds61AnmX77EWpMzmbFIZBZA33ZCqhJsZB5QpjynvNPK7qmnHd7ZAnl5mj9z0Tl3dp3nCFOL3OrotWZA6ncbaNM9zZCN28kcNizZBKUc7r').subscribe(result => {
-        //   console.log(result);
-        //   this.fields = result;
-        // });
     };
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({

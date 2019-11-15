@@ -22,7 +22,7 @@ class GraphController extends Controller
     public function retrieveUserProfile(){
         try {
 
-            $params = "first_name,last_name";
+            $params = "first_name,last_name,picture,posts,birthday,link,gender";
 
             $user = $this->api->get('/me?fields='.$params)->getGraphUser();
 

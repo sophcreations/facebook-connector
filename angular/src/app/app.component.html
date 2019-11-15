@@ -10,10 +10,13 @@ table, th, td {
 
 <body>
   <div style="text-align:center">
+    <a href="/login/facebook" class="btn btn-primary" style="color: #fff; background: #007bff;">
+        Home
+    </a>
     <h1>
       Hello {{ user?.name }}!
     </h1>
-    <img width="300" height="300" src={{fields?.picture.data.url}}>
+    <img width="300" height="300" src={{fields?.picture.url}}>
   </div>
   <h2>User Profile</h2>
   <table style="width:100%">
@@ -29,9 +32,9 @@ table, th, td {
       <td>{{ fields?.gender }}</td>
       <td>{{ fields?.birthday }}</td>
     </tr>
-  </table>
+ </table>
   <h2>User Post</h2>
-  {{ fields?.posts.data[0].message }} <!--Get only the first post on the users page -->
+  {{ fields?.posts[0].message }} <!-- Get only the first post on the users page -->
   <h2>User Profile</h2>
   {{ fields?.link }}
 </body>

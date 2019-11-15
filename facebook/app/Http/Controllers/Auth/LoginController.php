@@ -48,7 +48,7 @@ class LoginController extends Controller
      */
     public function redirectToFacebookProvider()
     {
-      return Socialite::driver('facebook')->scopes(["manage_pages", "publish_pages", "pages_show_list"])->redirect();
+      return Socialite::driver('facebook')->scopes(["manage_pages", "user_posts", "pages_show_list, user_birthday, user_gender, user_link"])->redirect();
     }
 
     /**
@@ -58,18 +58,10 @@ class LoginController extends Controller
      */
     public function handleProviderFacebookCallback()
     {
+      $auth_user = Socialite::driver('facebook')->user();
+      $user = User::where('email', $auth_user->email)->first();
 
-        $auth_user = Socialite::driver('facebook')->user();
-
-        //check if user exists and log the user in
-        $user = User::where('email', $auth_user->email)->first();
-        if($user){
-          if(Auth::loginUsingId($user->id)){
-            return redirect()->to('home');
-          }
-        }
-
-        // else add the user to the database
+      if(is_null($user)){ //user does not exist, register user in db
         $userSignup = User::updateOrCreate([
           'name' => $auth_user->user['name'],
           'email' => $auth_user->email,
@@ -79,9 +71,17 @@ class LoginController extends Controller
 
         // log the user in
         if($userSignup){
-          if(Auth::loginUsingId($auth_user->id)){
-            return redirect()->to('home');
+          $user = User::where('email', $auth_user->email)->first();
+          if(Auth::loginUsingId($user->id)){
+            return redirect()->to('app');
           }
         }
+      } else { //user exists, log them in
+        if($user){
+          if(Auth::loginUsingId($user->id)){
+            return redirect()->to('app');
+          }
+        }
+      }
     }
 }

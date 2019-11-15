@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="container">
+      <a href="/app" class="btn btn-primary" style="color: #fff; background: #007bff;">
+        Home
+    </a>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

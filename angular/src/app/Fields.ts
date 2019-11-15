@@ -1,5 +1,6 @@
-export class Random {
+export class Fields {
   id: number;
-  birthday: string;
   first_name: string;
+  last_name: string;
+  gender: string;
 }
